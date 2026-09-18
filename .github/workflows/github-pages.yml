@@ -45,9 +45,12 @@ jobs:
         run: |
           set -euxo pipefail
           test -d dist/client
-          find dist/client -maxdepth 4 -type f | sort | head -200
+          find dist/client -maxdepth 5 -type f | sort | head -300
+          test -f dist/client/yachimata-food-hygiene-website/index.html
+          test -f dist/client/yachimata-food-hygiene-website/faq/index.html
+          test -f dist/client/yachimata-food-hygiene-website/fees/index.html
           HTML_COUNT="$(find dist/client -type f -name '*.html' | wc -l)"
-          test "$HTML_COUNT" -ge 1
+          test "$HTML_COUNT" -ge 8
           touch dist/client/.nojekyll
 
       - name: Publish to gh-pages branch
