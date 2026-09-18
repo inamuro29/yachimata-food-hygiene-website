@@ -35,23 +35,27 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Prepare static GitHub Pages build
+      - name: Prepare GitHub Pages build
         run: node .github/scripts/prepare-github-pages.mjs
 
-      - name: Build static site
-        run: pnpm build
+      - name: Build browser-only static site
+        run: pnpm exec vite build --config .github/pages/vite.config.ts
 
-      - name: Verify generated site
+      - name: Create route entry files and verify
         run: |
           set -euxo pipefail
-          test -d dist/client
-          find dist/client -maxdepth 5 -type f | sort | head -300
-          test -f dist/client/yachimata-food-hygiene-website/index.html
-          test -f dist/client/yachimata-food-hygiene-website/faq/index.html
-          test -f dist/client/yachimata-food-hygiene-website/fees/index.html
-          HTML_COUNT="$(find dist/client -type f -name '*.html' | wc -l)"
-          test "$HTML_COUNT" -ge 8
-          touch dist/client/.nojekyll
+          test -f dist-pages/index.html
+          for route in faq fees insurance join links members payment; do
+            mkdir -p "dist-pages/$route"
+            cp dist-pages/index.html "dist-pages/$route/index.html"
+          done
+          cp dist-pages/index.html dist-pages/404.html
+          touch dist-pages/.nojekyll
+          test -f dist-pages/faq/index.html
+          test -f dist-pages/fees/index.html
+          test -f dist-pages/assets/*.js
+          test -f dist-pages/assets/*.css
+          find dist-pages -maxdepth 3 -type f | sort
 
       - name: Publish to gh-pages branch
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
@@ -59,7 +63,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -euxo pipefail
-          cd dist/client
+          cd dist-pages
           git init
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
