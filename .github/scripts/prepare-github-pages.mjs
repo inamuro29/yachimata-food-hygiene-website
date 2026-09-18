@@ -65,6 +65,16 @@ function prefixKnownPaths(source) {
   });
 }
 
+function markPageStatic(source) {
+  const config = "export const dynamic = 'force-static';\nexport const revalidate = false;\n";
+  if (source.includes("export const dynamic = 'force-static'")) return source;
+  const directive = source.match(/^(?:'use client'|\"use client\");\s*\n/);
+  if (directive) {
+    return `${directive[0]}\n${config}\n${source.slice(directive[0].length)}`;
+  }
+  return `${config}\n${source}`;
+}
+
 const sourceRoots = ['app', 'components', 'hooks', 'lib'];
 const sourceExtensions = new Set(['.ts', '.tsx', '.js', '.jsx', '.css']);
 let changedCount = 0;
@@ -74,27 +84,13 @@ for (const root of sourceRoots) {
   for (const filePath of files) {
     if (!sourceExtensions.has(path.extname(filePath))) continue;
     const before = await fs.readFile(filePath, 'utf8');
-    const after = prefixKnownPaths(before);
+    let after = prefixKnownPaths(before);
+    if (pageFiles.includes(filePath)) after = markPageStatic(after);
     if (after !== before) {
       await fs.writeFile(filePath, after, 'utf8');
       changedCount += 1;
     }
   }
-}
-
-// vinext's export-mode classifier only treats routes as definitely static when
-// the page module itself has an explicit static route config. Wrap each page in
-// CI only so the checked-in site source and client components stay untouched.
-for (const pageFile of pageFiles) {
-  const dir = path.dirname(pageFile);
-  const originalName = '__github-pages-content.tsx';
-  const originalPath = path.join(dir, originalName);
-  await fs.rename(pageFile, originalPath);
-  await fs.writeFile(
-    pageFile,
-    `import Page from './${originalName.replace(/\.tsx$/, '')}';\n\nexport const dynamic = 'force-static';\nexport const revalidate = false;\n\nexport default Page;\n`,
-    'utf8',
-  );
 }
 
 await fs.writeFile(
@@ -110,7 +106,7 @@ await fs.writeFile(
 );
 
 console.log(`GitHub Pages preparation complete. Rewrote ${changedCount} source file(s).`);
-console.log(`Wrapped ${pageFiles.length} page module(s) as explicit static routes.`);
+console.log(`Marked ${pageFiles.length} page module(s) as explicit static routes.`);
 console.log(`Base path: ${basePath}`);
 console.log(`Detected routes: ${[...routes].sort().join(', ')}`);
 console.log(`Detected public assets: ${[...assets].sort().join(', ')}`);
