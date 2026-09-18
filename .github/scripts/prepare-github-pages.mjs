@@ -30,10 +30,10 @@ const publicDir = path.join(projectRoot, 'public');
 
 const appFiles = await walk(appDir);
 const publicFiles = await walk(publicDir);
+const pageFiles = appFiles.filter((filePath) => path.basename(filePath) === 'page.tsx');
 
 const routes = new Set(['/']);
-for (const filePath of appFiles) {
-  if (path.basename(filePath) !== 'page.tsx') continue;
+for (const filePath of pageFiles) {
   const relativeDir = path.relative(appDir, path.dirname(filePath));
   if (!relativeDir) continue;
   routes.add('/' + relativeDir.split(path.sep).join('/'));
@@ -82,22 +82,35 @@ for (const root of sourceRoots) {
   }
 }
 
+// vinext's export-mode classifier only treats routes as definitely static when
+// the page module itself has an explicit static route config. Wrap each page in
+// CI only so the checked-in site source and client components stay untouched.
+for (const pageFile of pageFiles) {
+  const dir = path.dirname(pageFile);
+  const originalName = '__github-pages-content.tsx';
+  const originalPath = path.join(dir, originalName);
+  await fs.rename(pageFile, originalPath);
+  await fs.writeFile(
+    pageFile,
+    `import Page from './${originalName.replace(/\.tsx$/, '')}';\n\nexport const dynamic = 'force-static';\nexport const revalidate = false;\n\nexport default Page;\n`,
+    'utf8',
+  );
+}
+
 await fs.writeFile(
   path.join(projectRoot, 'next.config.ts'),
   `import type { NextConfig } from 'next';\n\nconst nextConfig: NextConfig = {\n  output: 'export',\n  basePath: '${basePath}',\n  trailingSlash: true,\n};\n\nexport default nextConfig;\n`,
   'utf8',
 );
 
-// Force prerendering of all discovered static routes. vinext currently marks
-// some App Router routes as "unknown" during static analysis even when they are
-// fully static; without this, output: 'export' can skip those pages.
 await fs.writeFile(
   path.join(projectRoot, 'vite.config.ts'),
-  `import tailwindcss from '@tailwindcss/postcss';\nimport vinext from 'vinext';\nimport { defineConfig } from 'vite';\n\nexport default defineConfig({\n  css: { postcss: { plugins: [tailwindcss()] } },\n  plugins: [vinext({ prerender: { routes: '*' } })],\n});\n`,
+  `import tailwindcss from '@tailwindcss/postcss';\nimport vinext from 'vinext';\nimport { defineConfig } from 'vite';\n\nexport default defineConfig({\n  css: { postcss: { plugins: [tailwindcss()] } },\n  plugins: [vinext()],\n});\n`,
   'utf8',
 );
 
 console.log(`GitHub Pages preparation complete. Rewrote ${changedCount} source file(s).`);
+console.log(`Wrapped ${pageFiles.length} page module(s) as explicit static routes.`);
 console.log(`Base path: ${basePath}`);
 console.log(`Detected routes: ${[...routes].sort().join(', ')}`);
 console.log(`Detected public assets: ${[...assets].sort().join(', ')}`);
