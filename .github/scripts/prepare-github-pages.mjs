@@ -88,11 +88,12 @@ await fs.writeFile(
   'utf8',
 );
 
-// GitHub Pages does not need the Cloudflare/OpenAI preview plugins. Keeping the
-// CI build minimal also avoids worker-specific output when producing static HTML.
+// Force prerendering of all discovered static routes. vinext currently marks
+// some App Router routes as "unknown" during static analysis even when they are
+// fully static; without this, output: 'export' can skip those pages.
 await fs.writeFile(
   path.join(projectRoot, 'vite.config.ts'),
-  `import tailwindcss from '@tailwindcss/postcss';\nimport vinext from 'vinext';\nimport { defineConfig } from 'vite';\n\nexport default defineConfig({\n  css: { postcss: { plugins: [tailwindcss()] } },\n  plugins: [vinext()],\n});\n`,
+  `import tailwindcss from '@tailwindcss/postcss';\nimport vinext from 'vinext';\nimport { defineConfig } from 'vite';\n\nexport default defineConfig({\n  css: { postcss: { plugins: [tailwindcss()] } },\n  plugins: [vinext({ prerender: { routes: '*' } })],\n});\n`,
   'utf8',
 );
 
