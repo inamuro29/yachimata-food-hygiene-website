@@ -52,10 +52,10 @@ export default function Home() {
     <section id="schedule" className="schedule-section"><div className="section-shell"><div className="section-heading"><div><p className="section-label">SCHEDULE</p><h2>今年度の行事</h2></div><p>会員のみなさまに関係する予定をお知らせします。</p></div><div className="schedule-grid">
       <article><CalendarDays/><p className="schedule-date">5月18日・19日</p><h3>検便・水質検査容器等配布</h3><p>八街商工会議所</p><span className="finished">終了しました</span></article>
       <article><CalendarDays/><p className="schedule-date">6月11日</p><h3>検便等提出・食品衛生講習会</h3><p>八街市中央公民館</p><span className="finished">終了しました</span></article>
-      <article className="next-event"><CalendarDays/><p className="schedule-date">9月9日・10日</p><h3>食品衛生指導員による巡回指導</h3><p>午前9:15〜12:00</p><span>実施日</span></article>
+      <article><CalendarDays/><p className="schedule-date">9月9日・10日</p><h3>食品衛生指導員による巡回指導</h3><p>午前9:15〜12:00</p><span className="finished">終了しました</span></article>
     </div></div></section>
 
-    <section id="about" className="about-section section-shell"><div className="about-lead"><p className="section-label">ABOUT US</p><h2>安心して食品を提供できる、<br/>地域の環境づくり。</h2></div><div className="about-copy"><p>八街市食品衛生連合会は、行政機関ではなく、食品を扱う事業者がボランティアで運営する団体です。</p><p>食中毒や感染症の予防を通じて、八街市内の食品事業者のみなさまの衛生意識と知識の向上を目指しています。地域・行政・関係機関と連携し、衛生指導や講習会を行っています。</p></div></section>
+    <section id="about" className="about-section section-shell"><div className="about-lead"><p className="section-label">ABOUT US</p><h2><span className="about-line">安心して食品を提供できる、</span><span className="about-line">地域の環境づくり。</span></h2></div><div className="about-copy"><p>八街市食品衛生連合会は、行政機関ではなく、食品を扱う事業者がボランティアで運営する団体です。</p><p>食中毒や感染症の予防を通じて、八街市内の食品事業者のみなさまの衛生意識と知識の向上を目指しています。地域・行政・関係機関と連携し、衛生指導や講習会を行っています。</p></div></section>
 
     <section className="activity-section"><div className="section-shell"><p className="section-label">OUR ACTIVITIES</p><h2>主な活動</h2><div className="activity-grid">{activities.map(({icon:Icon,title,text},index)=><article key={title}><span className="activity-number">0{index+1}</span><Icon/><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
 
