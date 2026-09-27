@@ -55,7 +55,7 @@ export default function Home() {
       <article><CalendarDays/><p className="schedule-date">9月9日・10日</p><h3>食品衛生指導員による巡回指導</h3><p>午前9:15〜12:00</p><span className="finished">終了しました</span></article>
     </div></div></section>
 
-    <section id="about" className="about-section section-shell"><div className="about-lead"><p className="section-label">ABOUT US</p><h2><span className="about-line">安心して食品を提供できる、</span><span className="about-line">地域の環境づくり。</span></h2></div><div className="about-copy"><p>八街市食品衛生連合会は、行政機関ではなく、食品を扱う事業者がボランティアで運営する団体です。</p><p>食中毒や感染症の予防を通じて、八街市内の食品事業者のみなさまの衛生意識と知識の向上を目指しています。地域・行政・関係機関と連携し、衛生指導や講習会を行っています。</p></div></section>
+    <section id="about" className="about-section section-shell"><div className="about-lead"><p className="section-label">ABOUT US</p><h2><span className="fixed-heading-line">安心して食品を</span><span className="fixed-heading-line">提供できる、</span><span className="fixed-heading-line">地域の環境づくり。</span></h2></div><div className="about-copy"><p>八街市食品衛生連合会は、行政機関ではなく、食品を扱う事業者がボランティアで運営する団体です。</p><p>食中毒や感染症の予防を通じて、八街市内の食品事業者のみなさまの衛生意識と知識の向上を目指しています。地域・行政・関係機関と連携し、衛生指導や講習会を行っています。</p></div></section>
 
     <section className="activity-section"><div className="section-shell"><p className="section-label">OUR ACTIVITIES</p><h2>主な活動</h2><div className="activity-grid">{activities.map(({icon:Icon,title,text},index)=><article key={title}><span className="activity-number">0{index+1}</span><Icon/><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
 

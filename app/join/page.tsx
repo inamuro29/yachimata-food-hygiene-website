@@ -48,7 +48,7 @@ export default function JoinPage() {
       <section id="benefits" className="join-intro section-shell">
         <div>
           <p className="section-label">MEMBER BENEFITS</p>
-          <h2>身近な場所で、<br/>衛生管理をサポート。</h2>
+          <h2><span className="fixed-heading-line">身近な場所で、</span><span className="fixed-heading-line">衛生管理を</span><span className="fixed-heading-line">サポートします。</span></h2>
         </div>
         <div className="join-intro-copy">
           <p>指定された日に八街商工会議所で、検便・水質検査の容器配布や提出、食品衛生講習会の受講ができます。</p>
