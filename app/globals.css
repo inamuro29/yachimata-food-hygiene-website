@@ -28,3 +28,7 @@
 .about-section{grid-template-columns:1.25fr .75fr;gap:6vw}.about-lead h2{font-size:clamp(2.2rem,3.6vw,3rem)}.fixed-heading-line{display:block;white-space:nowrap;font-size:inherit}
 @media(max-width:900px){.about-section{grid-template-columns:1fr;gap:25px}}
 @media(max-width:620px){.about-lead h2{font-size:1.55rem;line-height:1.65}}
+
+/* Membership call to action on the top page */
+.join-cta{padding:74px 0;color:#fff;background:linear-gradient(135deg,var(--navy),#087e8b)}.join-cta-inner{display:flex;align-items:center;justify-content:space-between;gap:50px}.join-cta .section-label{color:#9ce8d2}.join-cta h2{margin:0;font-family:"Yu Mincho","Hiragino Mincho ProN",serif;font-size:clamp(2rem,3.5vw,3.1rem);line-height:1.35}.join-cta p:not(.section-label){max-width:680px;margin:12px 0 0;color:#d5eeee}.join-cta a{display:inline-flex;flex:0 0 auto;align-items:center;gap:12px;padding:14px 22px;border-radius:999px;color:var(--navy);background:#9ce8d2;font-weight:700}
+@media(max-width:700px){.join-cta{padding:60px 0}.join-cta-inner{display:block}.join-cta a{margin-top:25px}}

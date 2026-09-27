@@ -17,9 +17,9 @@ const activities = [
 ];
 
 const usefulLinks = [
-  ['入会のご案内', '会員特典や加入方法をご案内します。', '/join'],
   ['年会費', '年会費と業種別の会費一覧をご確認いただけます。', '/fees'],
   ['検便容器等配布', '指定日に手続きできなかった場合の対応をご案内します。', '/members'],
+  ['あんしんフード君', '食品営業中の事故などに備える共済制度をご案内します。', '/insurance'],
   ['よくある質問', 'お問い合わせの多い内容をまとめています。', '/faq'],
 ];
 
@@ -58,6 +58,8 @@ export default function Home() {
     <section id="about" className="about-section section-shell"><div className="about-lead"><p className="section-label">ABOUT US</p><h2><span className="fixed-heading-line">安心して食品を</span><span className="fixed-heading-line">提供できる、</span><span className="fixed-heading-line">地域の環境づくり。</span></h2></div><div className="about-copy"><p>八街市食品衛生連合会は、行政機関ではなく、食品を扱う事業者がボランティアで運営する団体です。</p><p>食中毒や感染症の予防を通じて、八街市内の食品事業者のみなさまの衛生意識と知識の向上を目指しています。地域・行政・関係機関と連携し、衛生指導や講習会を行っています。</p></div></section>
 
     <section className="activity-section"><div className="section-shell"><p className="section-label">OUR ACTIVITIES</p><h2>主な活動</h2><div className="activity-grid">{activities.map(({icon:Icon,title,text},index)=><article key={title}><span className="activity-number">0{index+1}</span><Icon/><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>
+
+    <section className="join-cta"><div className="section-shell join-cta-inner"><div><p className="section-label">JOIN US</p><h2>ご入会を検討中の方へ</h2><p>会員特典や年会費、入会方法をご確認いただき、そのままWEBからお申し込みいただけます。</p></div><a href="/join">入会のご案内・お申し込み <ArrowRight size={18}/></a></div></section>
 
     <section id="member" className="member-section section-shell"><div className="section-heading"><div><p className="section-label">FOR MEMBERS</p><h2>会員の方へ</h2></div><a className="text-link" href="/links">関連リンク一覧 <ArrowRight size={16}/></a></div><div className="link-grid">{usefulLinks.map(([title,text,href])=><a key={title} href={href} target={href.startsWith('http')?'_blank':undefined} rel={href.startsWith('http')?'noreferrer':undefined}><div><h3>{title}</h3><p>{text}</p></div><ArrowRight/></a>)}</div></section>
 
