@@ -114,7 +114,7 @@ export default function FeesPage() {
         <div className="section-shell footer-grid">
           <div><div className="brand footer-brand"><span className="brand-mark"><ShieldCheck size={24}/></span><span>八街市食品衛生連合会</span></div><p>地域の食の安全を、みなさまとともに。</p></div>
           <div><h3>所在地</h3><p>〒289-1115<br/>八街市八街ほ224<br/>八街商工会議所内</p></div>
-          <div><h3>連絡先</h3><p>TEL 043-443-3021<br/>FAX 043-443-7221</p></div>
+          <div><h3>連絡先</h3><p>携帯 070-2797-4826</p></div>
         </div>
         <div className="copyright">© Yachimata Food Hygiene Association</div>
       </footer>

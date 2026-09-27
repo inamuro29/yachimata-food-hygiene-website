@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight, Banknote, CheckCircle2, Clock3, ExternalLink, MapPin, PackageCheck, Phone, ReceiptText, ShieldCheck } from 'lucide-react';
 
 const missedDistribution = [
-  { icon: Phone, number: '01', title: '事前に電話する', text: '八街商工会議所へ行く前に、食品衛生の検便等配布担当者が在席しているか必ず確認してください。', detail: '八街商工会議所　043-443-3021' },
+  { icon: Phone, number: '01', title: '事前に電話する', text: '八街商工会議所へ行く前に、食品衛生の検便等配布担当者が在席しているか必ず確認してください。', detail: '八街市食品衛生連合会　070-2797-4826' },
   { icon: PackageCheck, number: '02', title: '手続きをする', text: '期限を過ぎると容器・管理ファイルの在庫が不足し、返品後は受け取れない場合があります。', detail: 'できるだけ早めにご連絡ください' },
   { icon: MapPin, number: '03', title: '容器を受け取る', text: '八街で容器を受け取れない場合は、印旛保健所管内食品衛生協会へお問い合わせください。', detail: '平日 9:00～16:00' },
 ];
@@ -19,7 +19,7 @@ export default function MembersPage() {
 
     <section className="subpage-hero members-hero"><div className="section-shell subpage-hero-inner"><a className="back-link" href="/"><ArrowLeft size={17}/>トップページへ戻る</a><p className="eyebrow">TEST KIT GUIDANCE</p><h1>検便容器等配布</h1><p>指定日に手続きできなかった場合や、回収日に提出できなかった場合の対応をご案内します。</p><a className="hero-link" href="#distribution">対応手順を見る <ArrowRight size={18}/></a></div></section>
 
-    <section className="members-alert section-shell"><div><Clock3/><div><strong>まずご確認ください</strong><p>指定日を過ぎてから八街商工会議所へ行く場合は、担当者が在席しているか事前に電話で確認してください。</p></div></div><a href="tel:0434433021"><Phone size={18}/>043-443-3021</a></section>
+    <section className="members-alert section-shell"><div><Clock3/><div><strong>まずご確認ください</strong><p>指定日を過ぎてから八街商工会議所へ行く場合は、担当者が在席しているか事前に電話で確認してください。</p></div></div><a href="tel:07027974826"><Phone size={18}/>070-2797-4826</a></section>
 
     <section id="distribution" className="distribution-section section-shell"><div className="section-heading"><div><p className="section-label">MISSED DISTRIBUTION</p><h2>指定配布日に<br/>来られなかった方</h2></div><p>対象：年会費、検便・水質検査容器等の配布指定日に来られなかった方</p></div><div className="procedure-grid">{missedDistribution.map(({icon:Icon,number,title,text,detail})=><article key={number}><span className="procedure-number">{number}</span><Icon/><h3>{title}</h3><p>{text}</p><strong>{detail}</strong></article>)}</div></section>
 
@@ -27,6 +27,6 @@ export default function MembersPage() {
 
     <section className="refund-section section-shell"><div><p className="section-label">REFUND</p><h2>返金手続きの注意点</h2></div><div className="refund-card"><ReceiptText/><div><h3>協会発行の領収書が必要です</h3><p>印旛保健所管内食品衛生協会で発行された領収書を八街商工会議所へ持参してください。領収書は現金と引き換えで回収します。</p><p className="refund-warning">八街市食品衛生連合会発行の領収書では返金できません。</p></div></div><div className="refund-card"><Banknote/><div><h3>提出時はいったん支払いが必要です</h3><p>引取業者へ直接支払った後、八街商工会議所で返金手続きを行います。来所前に担当者の在席をご確認ください。</p></div></div></section>
 
-    <footer><div className="section-shell footer-grid"><div><div className="brand footer-brand"><span className="brand-mark"><ShieldCheck size={24}/></span><span>八街市食品衛生連合会</span></div><p>地域の食の安全を、みなさまとともに。</p></div><div><h3>所在地</h3><p>〒289-1115<br/>八街市八街ほ224<br/>八街商工会議所内</p></div><div><h3>連絡先</h3><p>TEL 043-443-3021<br/>FAX 043-443-7221</p></div></div><div className="copyright">© Yachimata Food Hygiene Association</div></footer>
+    <footer><div className="section-shell footer-grid"><div><div className="brand footer-brand"><span className="brand-mark"><ShieldCheck size={24}/></span><span>八街市食品衛生連合会</span></div><p>地域の食の安全を、みなさまとともに。</p></div><div><h3>所在地</h3><p>〒289-1115<br/>八街市八街ほ224<br/>八街商工会議所内</p></div><div><h3>連絡先</h3><p>携帯 070-2797-4826</p></div></div><div className="copyright">© Yachimata Food Hygiene Association</div></footer>
   </main>;
 }
