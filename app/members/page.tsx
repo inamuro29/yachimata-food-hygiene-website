@@ -1,7 +1,7 @@
 import { ArrowLeft, ArrowRight, Banknote, CheckCircle2, Clock3, ExternalLink, MapPin, PackageCheck, Phone, ReceiptText, ShieldCheck } from 'lucide-react';
 
 const missedDistribution = [
-  { icon: Phone, number: '01', title: '事前に電話する', text: '八街商工会議所へ行く前に、食品衛生の検便等配布担当者が在席しているか必ず確認してください。', detail: '八街市食品衛生連合会　070-2797-4826' },
+  { icon: Phone, number: '01', title: '事前に電話する', text: '八街商工会議所へ行く前に、食品衛生の検便等配布担当者が在席しているか必ず確認してください。', detail: '八街商工会議所　TEL 043-443-3021' },
   { icon: PackageCheck, number: '02', title: '手続きをする', text: '期限を過ぎると容器・管理ファイルの在庫が不足し、返品後は受け取れない場合があります。', detail: 'できるだけ早めにご連絡ください' },
   { icon: MapPin, number: '03', title: '容器を受け取る', text: '八街で容器を受け取れない場合は、印旛保健所管内食品衛生協会へお問い合わせください。', detail: '平日 9:00～16:00' },
 ];
@@ -19,7 +19,7 @@ export default function MembersPage() {
 
     <section className="subpage-hero members-hero"><div className="section-shell subpage-hero-inner"><a className="back-link" href="/"><ArrowLeft size={17}/>トップページへ戻る</a><p className="eyebrow">TEST KIT GUIDANCE</p><h1>検便容器等配布</h1><p>指定日に手続きできなかった場合や、回収日に提出できなかった場合の対応をご案内します。</p><a className="hero-link" href="#distribution">対応手順を見る <ArrowRight size={18}/></a></div></section>
 
-    <section className="members-alert section-shell"><div><Clock3/><div><strong>まずご確認ください</strong><p>指定日を過ぎてから八街商工会議所へ行く場合は、担当者が在席しているか事前に電話で確認してください。</p></div></div><a href="tel:07027974826"><Phone size={18}/>070-2797-4826</a></section>
+    <section className="members-alert section-shell"><div><Clock3/><div><strong>まずご確認ください</strong><p>指定日を過ぎてから八街商工会議所へ行く場合は、担当者が在席しているか事前に電話で確認してください。</p></div></div><a href="tel:0434433021"><Phone size={18}/>八街商工会議所　TEL 043-443-3021</a></section>
 
     <section id="distribution" className="distribution-section section-shell"><div className="section-heading"><div><p className="section-label">MISSED DISTRIBUTION</p><h2>指定配布日に<br/>来られなかった方</h2></div><p>対象：年会費、検便・水質検査容器等の配布指定日に来られなかった方</p></div><div className="procedure-grid">{missedDistribution.map(({icon:Icon,number,title,text,detail})=><article key={number}><span className="procedure-number">{number}</span><Icon/><h3>{title}</h3><p>{text}</p><strong>{detail}</strong></article>)}</div></section>
 
