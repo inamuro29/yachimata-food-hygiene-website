@@ -1,7 +1,8 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
-const basePath = '/yachimata-food-hygiene-website';
+// The site is published from the root of the custom domain.
+const basePath = '';
 const projectRoot = process.cwd();
 
 async function exists(filePath) {

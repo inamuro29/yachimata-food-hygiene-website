@@ -50,6 +50,7 @@ jobs:
             cp dist-pages/index.html "dist-pages/$route/index.html"
           done
           cp dist-pages/index.html dist-pages/404.html
+          echo "yachishoku.jp" > dist-pages/CNAME
           touch dist-pages/.nojekyll
           test -f dist-pages/faq/index.html
           test -f dist-pages/fees/index.html
