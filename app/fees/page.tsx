@@ -33,11 +33,50 @@ const feeDocuments = [
   },
 ];
 
-const feeSummary = [
-  ['営業許可が必要な業種', '飲食店営業など', '業種・規模により異なります'],
-  ['営業届出の対象となる業種', '販売店・製造業など', '業種・規模により異なります'],
-  ['許可・届出が不要な業種', '対象外となる営業', '業種・規模により異なります'],
+const permittedFees = [
+  ['飲食店営業（通常の飲食店・仕出弁当屋・弁当屋・旅館・ホテル・居酒屋・スナック等）', '4,000円'],
+  ['調理機能付き自動販売機による営業', '4,000円'],
+  ['食肉販売業', '4,000円'], ['魚介類販売業', '4,000円'], ['魚介類競り売り営業', '4,000円'],
+  ['集乳業', '5,000円'], ['乳処理業', '5,000円'], ['特別牛乳搾取処理業', '5,000円'],
+  ['食肉処理業', '4,000円'], ['食品の放射線照射業', '5,000円'], ['菓子製造業', '4,000円'],
+  ['アイスクリーム類製造業', '5,000円'], ['乳製品製造業', '5,000円'], ['清涼飲料水製造業', '5,000円'],
+  ['食肉製品製造業', '5,000円'], ['水産製品製造業', '5,000円'], ['氷雪製造業', '5,000円'],
+  ['液卵製造業', '5,000円'], ['食用油脂製造業', '5,000円'], ['みそ又はしょうゆ製造業', '5,000円'],
+  ['酒類製造業', '5,000円'], ['豆腐製造業', '5,000円'], ['納豆製造業', '5,000円'],
+  ['麺類製造業', '5,000円'], ['そうざい製造業', '5,000円'], ['複合型そうざい製造業', '5,000円'],
+  ['冷凍食品製造業', '5,000円'], ['複合型冷凍食品製造業', '5,000円'], ['漬物製造業', '5,000円'],
+  ['密封包装食品製造業', '5,000円'], ['食品の小分け業', '4,000円'], ['添加物製造業', '5,000円'],
 ];
+
+const notifiedFees = [
+  ['食品の冷凍又は冷蔵業', '5,000円'],
+  ['調味料・製茶・農産保存食料品・その他の食料品の製造・加工業', '5,000円'],
+  ['魚介類販売業（包装済み魚介類のみ）', '4,000円'], ['食肉販売業（包装済み食肉のみ）', '4,000円'],
+  ['乳類販売業', '4,000円'], ['氷雪販売業', '4,000円'], ['コップ式自動販売機（自動洗浄・屋内設置）', '3,000円'],
+  ['弁当販売業', '4,000円'], ['野菜果物販売業', '4,000円'], ['米穀類販売業', '4,000円'],
+  ['通信販売・訪問販売による販売業', '4,000円'], ['コンビニエンスストア', '4,000円'],
+  ['百貨店・総合スーパー', '4,000円'], ['自動販売機による販売業', '4,000円'], ['その他の食料・飲料販売業', '4,000円'],
+  ['添加物製造・加工業', '5,000円'], ['健康食品の製造・加工業', '5,000円'],
+  ['コーヒー製造・加工業（飲料の製造を除く）', '5,000円'], ['農産保存食料品製造・加工業', '5,000円'],
+  ['調味料製造・加工業', '5,000円'], ['糖類製造・加工業', '5,000円'], ['精穀・製粉業', '5,000円'],
+  ['製茶業', '5,000円'], ['海藻製造・加工業', '5,000円'], ['卵選別包装業', '5,000円'],
+  ['その他の食料品製造・加工業', '5,000円'], ['行商', '5,000円'], ['集団給食施設', '5,000円'],
+  ['器具・容器包装の製造・加工業', '5,000円'], ['露店・仮設店舗等での飲食提供（営業とみなされないもの）', '5,000円'],
+  ['その他', '5,000円'],
+];
+
+const exemptFees = [
+  ['食品又は添加物の輸入をする営業', '3,000円'],
+  ['食品又は添加物の貯蔵・運搬業（常温保存品のみ）', '3,000円'],
+  ['常温で長期保存しても腐敗・変敗のおそれがない包装食品の販売（カップ麺・スナック菓子等）', '3,000円'],
+  ['合成樹脂以外の器具・容器包装の製造業', '3,000円'],
+  ['1回20食程度未満の営業以外の給食施設（学校・診療所等）', '3,000円'],
+  ['漁業・農業の採取業', '3,000円'], ['その他', '3,000円'],
+];
+
+function FeeTable({title, rows}:{title:string; rows:string[][]}) {
+  return <section className="fee-list-card"><h3>{title}</h3><div className="fee-list-scroll"><table className="fee-list-table"><thead><tr><th scope="col">業種</th><th scope="col">年会費</th></tr></thead><tbody>{rows.map(([name,fee])=><tr key={name}><th scope="row">{name}</th><td>{fee}</td></tr>)}</tbody></table></div></section>;
+}
 
 export default function FeesPage() {
   return (
@@ -95,17 +134,15 @@ export default function FeesPage() {
       <section id="documents" className="fee-documents section-shell">
         <div className="section-heading">
           <div><p className="section-label">FEE LIST</p><h2>業種ごとの会費一覧</h2></div>
-          <p>まず下の表で区分を確認し、詳しい業種別の金額は資料でご確認ください。</p>
+          <p>2025年4月1日から適用されている、現在の年会費です。</p>
         </div>
-        <div className="fee-summary-table-wrap">
-          <table className="fee-summary-table">
-            <caption>年会費の区分</caption>
-            <thead><tr><th scope="col">区分</th><th scope="col">主な対象</th><th scope="col">会費</th></tr></thead>
-            <tbody>{feeSummary.map(([category, examples, amount]) => <tr key={category}><th scope="row">{category}</th><td>{examples}</td><td>{amount}</td></tr>)}</tbody>
-          </table>
-          <p className="fee-table-note">正確な金額は、営業内容に該当するPDF一覧でご確認ください。判断に迷う場合は事務局へお問い合わせください。</p>
+        <div className="fee-list-stack">
+          <FeeTable title="許可業種" rows={permittedFees}/>
+          <FeeTable title="届出業種" rows={notifiedFees}/>
+          <FeeTable title="許可・届出不要業種" rows={exemptFees}/>
         </div>
-        <div className="fee-document-grid">
+        <p className="fee-rule-note">複数の業種に該当する場合も、メインとなる業種の会費を適用します。以前の「2種以上の許可・届出によるプラス1,000円」は廃止されています。</p>
+        <details className="fee-source-documents"><summary>改定時の原資料（PDF）を確認する</summary><div className="fee-document-grid">
           {feeDocuments.map((document) => (
             <a className={document.featured ? 'featured' : ''} key={document.title} href={document.href} target="_blank" rel="noreferrer">
               <span className="document-icon"><FileText/></span>
@@ -113,7 +150,7 @@ export default function FeesPage() {
               <ExternalLink/>
             </a>
           ))}
-        </div>
+        </div></details>
         <aside className="fee-help"><strong>どの業種に該当するか分からない場合</strong><p>年会費や業種区分についてのご質問は、八街市食品衛生連合会事務局までお問い合わせください。</p></aside>
       </section>
 
