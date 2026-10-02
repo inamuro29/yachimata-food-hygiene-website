@@ -33,6 +33,12 @@ const feeDocuments = [
   },
 ];
 
+const feeSummary = [
+  ['営業許可が必要な業種', '飲食店営業など', '業種・規模により異なります'],
+  ['営業届出の対象となる業種', '販売店・製造業など', '業種・規模により異なります'],
+  ['許可・届出が不要な業種', '対象外となる営業', '業種・規模により異なります'],
+];
+
 export default function FeesPage() {
   return (
     <main className="subpage fee-page">
@@ -89,13 +95,21 @@ export default function FeesPage() {
       <section id="documents" className="fee-documents section-shell">
         <div className="section-heading">
           <div><p className="section-label">FEE LIST</p><h2>業種ごとの会費一覧</h2></div>
-          <p>該当する業種のPDFを開いて、年会費をご確認ください。</p>
+          <p>まず下の表で区分を確認し、詳しい業種別の金額は資料でご確認ください。</p>
+        </div>
+        <div className="fee-summary-table-wrap">
+          <table className="fee-summary-table">
+            <caption>年会費の区分</caption>
+            <thead><tr><th scope="col">区分</th><th scope="col">主な対象</th><th scope="col">会費</th></tr></thead>
+            <tbody>{feeSummary.map(([category, examples, amount]) => <tr key={category}><th scope="row">{category}</th><td>{examples}</td><td>{amount}</td></tr>)}</tbody>
+          </table>
+          <p className="fee-table-note">正確な金額は、営業内容に該当するPDF一覧でご確認ください。判断に迷う場合は事務局へお問い合わせください。</p>
         </div>
         <div className="fee-document-grid">
           {feeDocuments.map((document) => (
             <a className={document.featured ? 'featured' : ''} key={document.title} href={document.href} target="_blank" rel="noreferrer">
               <span className="document-icon"><FileText/></span>
-              <div><p>{document.featured ? 'まとめて確認' : 'PDF資料'}</p><h3>{document.title}</h3><span>{document.description}</span></div>
+              <div><p>{document.featured ? 'まとめて確認' : '詳細資料'}</p><h3>{document.title}</h3><span>{document.description}</span></div>
               <ExternalLink/>
             </a>
           ))}
