@@ -20,15 +20,16 @@
 
 .notice-list{display:grid;gap:18px}.notice-card.window-hours-notice{border-color:#8ed5c0;background:#f0faf6}.window-hours-notice .notice-icon{background:var(--green)}.window-hours-notice .notice-date{color:#28785e}
 
-.norovirus-alert{padding:94px 0 18px;background:linear-gradient(to bottom,var(--navy) 78px,#fff8ec 78px)}
+.norovirus-alert{padding:30px 0 0;background:#fff8ec}
 .norovirus-alert-inner{display:flex;align-items:center;justify-content:space-between;gap:32px;padding:24px 30px;border:1px solid #e9c68d;border-left:6px solid #cf781e;border-radius:12px;background:#fff;box-shadow:0 8px 24px rgba(89,56,20,.08)}
 .norovirus-alert-label{display:flex;align-items:center;gap:7px;margin:0 0 4px;color:#9b5519;font-size:.82rem;font-weight:700}
 .norovirus-alert h2{margin:0 0 5px;color:#713e16;font-size:clamp(1.18rem,2vw,1.55rem);line-height:1.45}
 .norovirus-alert-inner p:last-child{margin:0;line-height:1.65}
 .norovirus-alert a{display:inline-flex;flex:none;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;color:#fff;background:#92501b;font-weight:700;white-space:nowrap}
 .norovirus-alert a:hover,.norovirus-alert a:focus-visible{background:#713e16}
+.norovirus-alert + .notice-wrap{padding-top:44px}
 @media(max-width:900px){.norovirus-alert-inner{align-items:flex-start;flex-direction:column;gap:15px}}
-@media(max-width:620px){.norovirus-alert{padding:82px 0 16px;background:linear-gradient(to bottom,var(--navy) 66px,#fff8ec 66px)}.norovirus-alert-inner{padding:20px;border-left-width:5px}.norovirus-alert a{white-space:normal}}
+@media(max-width:620px){.norovirus-alert{padding-top:20px}.norovirus-alert-inner{padding:20px;border-left-width:5px}.norovirus-alert a{white-space:normal}.norovirus-alert + .notice-wrap{padding-top:36px}}
 
 /* LINE contact card */
 .line-contact-card{display:grid;grid-template-columns:1fr 142px;align-items:center;gap:28px}.line-account-info p{margin:0;color:#cce7e5;font-size:.86rem}.line-account-info .line-add-button{display:inline-flex;margin-top:18px;padding:10px 17px;border:1px solid rgba(156,232,210,.65);border-radius:999px}.line-qr-link{display:flex!important;flex-direction:column;align-items:center;gap:8px;margin:0!important}.line-qr{display:block;width:142px;height:142px;padding:7px;border-radius:10px;background:#fff}.line-qr-link span{font-size:.72rem!important;letter-spacing:0!important;color:#d8eeee}

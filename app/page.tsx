@@ -39,7 +39,15 @@ export default function Home() {
       <nav aria-label="メインメニュー"><a href="#news">お知らせ</a><a href="#schedule">今年度の行事</a><a href="#about">連合会について</a><a href="#member">会員の方へ</a><a href="#contact">お問い合わせ</a></nav>
     </header>
 
-    <section id="top" className="norovirus-alert" aria-labelledby="norovirus-alert-title">
+    <section id="top" className="hero" aria-roledescription="カルーセル">
+      {slides.map((slide,index)=><img key={slide.src} className={`hero-image ${index===active?'is-active':''}`} src={slide.src} alt={slide.alt}/>)}
+      <div className="hero-shade"/>
+      <div className="hero-copy"><p className="eyebrow">YACHIMATA FOOD HYGIENE ASSOCIATION</p><h1>食の安心を、<br/>地域とともに。</h1><p>八街市の食品事業者のみなさまと、<br className="desktop-only"/>安全で健やかな食環境を守ります。</p><a className="hero-link" href="#about">私たちの活動を見る <ArrowRight size={18}/></a></div>
+      <div className="hero-controls" aria-label="スライド操作"><button onClick={()=>move(-1)} aria-label="前の写真"><ChevronLeft/></button><div className="hero-dots">{slides.map((_,index)=><button key={index} className={index===active?'is-active':''} onClick={()=>setActive(index)} aria-label={`${index+1}枚目を表示`}/>)}</div><button onClick={()=>move(1)} aria-label="次の写真"><ChevronRight/></button><button onClick={()=>setPlaying(v=>!v)} aria-label={playing?'自動再生を停止':'自動再生を開始'}>{playing?<Pause/>:<Play/>}</button></div>
+      <a href="#news" className="scroll-cue">SCROLL<span/></a>
+    </section>
+
+    <section id="news" className="norovirus-alert" aria-labelledby="norovirus-alert-title">
       <div className="section-shell norovirus-alert-inner">
         <div>
           <p className="norovirus-alert-label"><AlertTriangle size={19} aria-hidden="true"/> 千葉県からのお知らせ</p>
@@ -50,15 +58,7 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="hero" aria-roledescription="カルーセル">
-      {slides.map((slide,index)=><img key={slide.src} className={`hero-image ${index===active?'is-active':''}`} src={slide.src} alt={slide.alt}/>)}
-      <div className="hero-shade"/>
-      <div className="hero-copy"><p className="eyebrow">YACHIMATA FOOD HYGIENE ASSOCIATION</p><h1>食の安心を、<br/>地域とともに。</h1><p>八街市の食品事業者のみなさまと、<br className="desktop-only"/>安全で健やかな食環境を守ります。</p><a className="hero-link" href="#about">私たちの活動を見る <ArrowRight size={18}/></a></div>
-      <div className="hero-controls" aria-label="スライド操作"><button onClick={()=>move(-1)} aria-label="前の写真"><ChevronLeft/></button><div className="hero-dots">{slides.map((_,index)=><button key={index} className={index===active?'is-active':''} onClick={()=>setActive(index)} aria-label={`${index+1}枚目を表示`}/>)}</div><button onClick={()=>move(1)} aria-label="次の写真"><ChevronRight/></button><button onClick={()=>setPlaying(v=>!v)} aria-label={playing?'自動再生を停止':'自動再生を開始'}>{playing?<Pause/>:<Play/>}</button></div>
-      <a href="#news" className="scroll-cue">SCROLL<span/></a>
-    </section>
-
-    <section id="news" className="notice-wrap section-shell"><div className="section-label">IMPORTANT NOTICE</div><div className="notice-list"><article className="notice-card window-hours-notice"><div className="notice-icon">!</div><div><p className="notice-date">2026.10.01から</p><h2>印旛保健所・食品衛生協会の窓口受付時間が変わります</h2><p>令和8年10月1日から、印旛保健所の窓口受付時間（一部窓口を除く）と印旛食品衛生協会の窓口受付時間は、午前9時から午後4時までとなります。</p><a href="https://www.pref.chiba.lg.jp/kf-inba/" target="_blank" rel="noreferrer">印旛保健所の案内を見る <ExternalLink size={16}/></a></div></article></div></section>
+    <section className="notice-wrap section-shell"><div className="section-label">IMPORTANT NOTICE</div><div className="notice-list"><article className="notice-card window-hours-notice"><div className="notice-icon">!</div><div><p className="notice-date">2026.10.01から</p><h2>印旛保健所・食品衛生協会の窓口受付時間が変わります</h2><p>令和8年10月1日から、印旛保健所の窓口受付時間（一部窓口を除く）と印旛食品衛生協会の窓口受付時間は、午前9時から午後4時までとなります。</p><a href="https://www.pref.chiba.lg.jp/kf-inba/" target="_blank" rel="noreferrer">印旛保健所の案内を見る <ExternalLink size={16}/></a></div></article></div></section>
 
     <section id="schedule" className="schedule-section"><div className="section-shell"><div className="section-heading"><div><p className="section-label">SCHEDULE</p><h2>今年度の行事</h2></div><p>会員のみなさまに関係する予定をお知らせします。</p></div><div className="schedule-grid">
       <article><CalendarDays/><p className="schedule-date">5月18日・19日</p><h3>検便・水質検査容器等配布</h3><p>八街商工会議所</p><span className="finished">終了しました</span></article>
