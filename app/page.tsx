@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { ArrowRight, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, ExternalLink, HandHeart, Pause, Play, ShieldCheck, ThermometerSun, Users } from 'lucide-react';
+import { AlertTriangle, ArrowRight, CalendarDays, ChevronLeft, ChevronRight, ClipboardCheck, ExternalLink, HandHeart, Pause, Play, ShieldCheck, ThermometerSun, Users } from 'lucide-react';
 
 const slides = [
   { src: '/hero-kitchen.png', alt: '明るく清潔に整えられた業務用厨房' },
@@ -39,7 +39,18 @@ export default function Home() {
       <nav aria-label="メインメニュー"><a href="#news">お知らせ</a><a href="#schedule">今年度の行事</a><a href="#about">連合会について</a><a href="#member">会員の方へ</a><a href="#contact">お問い合わせ</a></nav>
     </header>
 
-    <section id="top" className="hero" aria-roledescription="カルーセル">
+    <section id="top" className="norovirus-alert" aria-labelledby="norovirus-alert-title">
+      <div className="section-shell norovirus-alert-inner">
+        <div>
+          <p className="norovirus-alert-label"><AlertTriangle size={19} aria-hidden="true"/> 千葉県からのお知らせ</p>
+          <h2 id="norovirus-alert-title">ノロウイルス食中毒警報が発令されました</h2>
+          <p>千葉県は2026年11月16日に警報を発令しました。期間は2027年3月31日までです。調理前の手洗いを徹底し、体調が悪いときは食品を直接扱わないようにしましょう。</p>
+        </div>
+        <a href="https://www.pref.chiba.lg.jp/eishi/press/2026/norokeihou-r08.html" target="_blank" rel="noopener noreferrer">千葉県の公式発表を見る <ExternalLink size={17} aria-hidden="true"/></a>
+      </div>
+    </section>
+
+    <section className="hero" aria-roledescription="カルーセル">
       {slides.map((slide,index)=><img key={slide.src} className={`hero-image ${index===active?'is-active':''}`} src={slide.src} alt={slide.alt}/>)}
       <div className="hero-shade"/>
       <div className="hero-copy"><p className="eyebrow">YACHIMATA FOOD HYGIENE ASSOCIATION</p><h1>食の安心を、<br/>地域とともに。</h1><p>八街市の食品事業者のみなさまと、<br className="desktop-only"/>安全で健やかな食環境を守ります。</p><a className="hero-link" href="#about">私たちの活動を見る <ArrowRight size={18}/></a></div>
